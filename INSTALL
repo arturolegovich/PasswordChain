@@ -1,0 +1,47 @@
+phpChain 2.0 - Install
+======================
+
+-- Setup instructions.
+
+You will need:
+
+1. Apache with mod_ssl support.
+        See http://www.modssl.org
+
+2. PHP with mcrypt and MySQL support.
+        See http://www.php.net/manual/en/ref.mcrypt.php
+
+3. MySQL. 
+        See http://www.mysql.com
+
+
+Configuring the above is beyond the scope of this documentation. Each of the
+referenced sites should give you enough information to get going.
+
+Step 1:
+
+Rename the file config/config.dist.php to config/config.php and configure 
+username, password and database name. Optionally, if your MySQL server is not
+localhost, modify the host here as well.
+
+Step 2:
+
+Move all the files to location of your SSL configured website. Go to the site
+in your browser and verify that everything works. Create a user. Login. Create
+some categories. Try making an entry in the database. Make sure you are able
+to retrieve it. (NOTE! Passwords are hidden from the screen by default, to
+prevent people reading over your shoulder. To display the password for an 
+entry, move the mouse over the password field for that entry.)
+
+
+-- Questions?
+
+Email me@gogogadgetscott.info if you have any questions.
+
+
+-- Known problems.
+
+There's no way to prevent anyone from creating a new login. The site you setup
+is effectively public. To work around this, either use .htaccess files to 
+restrict access to the site, or remove the newlogin.php file once you've
+created logins.

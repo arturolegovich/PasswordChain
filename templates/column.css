@@ -1,0 +1,81 @@
+/**
+ * Column stylesheet
+ *
+ * This file is part of phpChain.
+ *
+ * phpChain is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * phpChain is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with phpChain; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ * @package    phpChain
+ * @version    $Id: column.css,v 1.10 2006/02/27 04:39:51 gogogadgetscott Exp $
+ * @link       http://phpchain.sourceforge.net/
+ * @author     Scott Greenberg <me@gogogadgetscott.com>
+ * @copyright  Copyright (c) 2005-2006. SEG Technology. All rights reserved.
+ */
+
+/* --- Page spans --- */
+#titlebar, #menubar { text-align: right;  overflow: hidden; padding: 5px 10px; }
+#titlebar {background: #fc995e url(img/toolbar.png) repeat-x; font-size: large; border-top: outset #742c02; }
+#titlebar, #titlebar a { color: #000; }
+#menubar { background: #bf4b04 url(img/menubar.png) repeat-x; }
+#menubar, #menubar a { color: #000; }
+#menubar a:hover { background: #bf4b04; }
+.menuleft { float: left; text-align: left; }
+#nossl { text-align: center; font-size: medium; background: #FF0000 url(img/nossl.png) repeat-x; }
+#nossl a { text-decoration: underline; color: white; font-weight: bold; }
+
+/* --- Sidebar --- */
+#sidebar { padding: 0; padding-top: 5px; text-align: center; width: 160px; float: left; z-index: 1; }
+#groupswrap { padding: 2px; background-image: url(img/yellowfilter.gif); border: thin outset #742c02; font-weight: bold; margin-bottom: 5px; text-align: left; }
+#groups form { text-align: center; }
+#groups ul { margin: 0; padding: 0; list-style-type: none; text-align: left; width: 100%; }
+#groups li { margin: 0; border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; border-left: 2px solid #aaa; }
+#groups a { display: block; padding: 2px 5px; text-decoration: none; }
+#groups a:link, #groups a:visited { text-decoration: none; }
+#selected a { background-color: #fa6b14; border-right: 10px solid #bf4b04; }
+#groups a:hover { background-color: #faa614; color: #fff; border-right: 10px solid #bf4b04; }
+#sidebox { background-image: url(img/orangefilter.gif); border: thin outset #742c02; font-weight: bold; color: #000; margin-bottom: 5px; }
+#sidebox p { text-align: center; }
+.heading2 {  }
+ 
+/* ------- Button styles  ------- */
+a.button { display: block; background: transparent url(img/buttonBackground.gif) no-repeat; width: 132px; height: 28px; margin: 5px auto; padding: 5px 0 0 0; text-align: center; font-weight: bold; text-decoration: none; font-family: Arial, Helvetica, sans-serif; border: 0; }
+a.button:link, a.button:visited { color: #002577; }
+a.button:hover, a.button:active { background-position: 0 -36px; color: #fff; }
+
+/* ------- Main content -------- */
+#content { margin: 5px 0 5px 165px;  padding: 5px; padding-right: 0; text-align: center; background: #fc995e; }
+#content th { background: #bf4b04; border: 1px solid #fc995e; border-bottom: 0; color: #fff; font-size: 11px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; text-align: left; padding: 6px; }
+.entries { border: 0; width: 99%; background: #fc995e; text-align: left;  font-size: 95%; }
+.entries a { color: blue; }
+.entryodd { background-color: #fdfed0; color: #000; }
+.entryeven { background-color: #dff6bd; color: #000; }
+.entryodd a:hover, .entryeven a:hover { display: block; background-color: #faa614; color: #fff; }
+.passwordodd { color: #fdfed0; }
+.passwordeven { color: #dff6bd; }
+.passwordshow { color: #000; }
+
+/* ------- Settings/Logs -------- */
+.heading1 { background-color: #fc995e; }
+
+/*  ------- GNU General Public License  ------- */
+#gpl { text-align: left; font-family: sans-serif; }
+
+/* ------- Footer -------- */
+#footer { background: url(img/orangefilter.gif); font-weight: bold; color: #000; padding: 2px 10px; clear: both; text-align: right; overflow: hidden; border-bottom: outset #742c02; }
+#footer a { color: #000; text-decoration: none; }
+#stats { background-color: #fff; }
+
+/* ------- Right hand border -------- */
+#titlebar, #menubar, #nossl, #content, #footer { border-left: thin #742c02 solid; border-right: outset #742c02; }

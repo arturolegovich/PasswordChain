@@ -1,0 +1,49 @@
+phpChain 2.0 - Readme
+=====================
+
+-- Requirements
+
+The system requires PHP 4.3.0 with MySQL support, and libmcrypt 
+support. See this page for information on mcrypt:
+
+- PHP 4.3.0 or higher
+- MySQL 4.1.0 or higher
+
+http://www.php.net/manual/en/ref.mcrypt.php
+
+It's STRONGLY recommended that you run this system on a web server with 
+SSL support. If the site is not secured using SSL, the whole point of 
+having a secure database is lost. Configuring SSL is beyond the scope 
+of this document. See the following site for information:
+
+http://www.modssl.org/
+
+========================================================================
+IF YOU DO NOT USE SSL, YOUR PASSWORDS WILL BE SENT PLAINTEXT OVER THE 
+INTERNET!
+========================================================================
+
+The system was built on and tested with apache 1.3.27, PHP 4.3.2, 
+mod_ssl 2.8.14 with OpenSSL 0.9.7b, all running on Linux. Other 
+platforms may also work, but have not been tested.
+
+
+-- Licensing
+
+PasswordChain is available under the terms of the GNU Generl Public
+License (GPL). A copy of the GPL is included in the archive (LICENSE).
+
+
+-- Copyright
+
+Copyright (c) 2005. Scott Greenberg Technology. All rights reserved.
+All Rights Reserved.
+See CREDITS for details and a complete list of authors.
+
+-- Contact Information
+
+The website for this tool is at http://phpchain.sourceforge.net/
+The author's email is me@gogogadgetscott.info
+
+If you think you've discovered a security problem with this system, 
+please contact us immediately.
