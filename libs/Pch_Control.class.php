@@ -169,7 +169,7 @@ public function __clone()
 {
   // отключение отладку
   $this->debug($this->debug(null));
-  // очиста объекта
+  // очистка объекта
   $this->clearAccessors();
 }
 
