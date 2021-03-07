@@ -1,0 +1,76 @@
+/**
+ * General stylesheet
+ *
+ * This file is part of phpChain.
+ *
+ * phpChain is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * phpChain is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with phpChain; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ * @package    phpChain
+ * @version    $Id: style.css,v 1.8 2006/02/27 04:39:51 gogogadgetscott Exp $
+ * @link       http://phpchain.sourceforge.net/
+ * @author     Scott Greenberg <me@gogogadgetscott.com>
+ * @copyright  Copyright (c) 2005-2006. SEG Technology. All rights reserved.
+ */
+
+/* ------- General -------- */
+body { font: small "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif; margin: 10px; padding: 0; background-color: #ffffff; background-image: url(./img/light_key.jpg); background-attachment: fixed; background-position: bottom left; background-repeat: no-repeat; }
+h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
+a { color: #000; text-decoration: none; }
+p, ol, ul { padding: .2em; text-align: left; list-style-position: inside; }
+img { border: 0; padding: 0; margin: 0; }
+button { display: inline; }
+
+/* ------- Main content -------- */
+#content { margin: 10px 0px; padding: 0px; color: #000; }
+
+/* ------- Settings/Logs -------- */
+table.center { margin-left: auto; margin-right: auto; }
+.settings { width: 450px; padding-bottom: 10px; margin-bottom: 10px; }
+.userlogs { width: 85%; padding-bottom: 10px; margin-bottom: 10px; }
+.heading1, .heading2 { position: relative; top: 10px; padding: 0 5px; font-weight: bold; }
+
+/* ------- Form -------- */
+form { margin: 0; padding: 0; }
+.user, .entry, .settings, .userlogs { border: 1px dotted #333; padding: 5px; text-align: center; font-weight: bold; margin: auto; }
+.user { height: 150px; width: 350px; padding-bottom: 10px; margin-bottom: 10px; }
+.row { padding-top: 10px; }
+.row span.label { float: left; width: 150px; text-align: right; }
+.row .formw, .row input { width: 180px; text-align: center; }
+
+/* ------- Settings form -------- */
+div.rows { clear: right; padding-top: 10px; }
+div.rows span.label { float: left; width: 54%; text-align: right; }
+div.rows span.formw { float: right; width: 43%; text-align: left; padding-right: 5px; }
+div.rows span.formw input, div.rows span.formw textarea { width: 90%; }
+div.rows span.formw select { width: 50%; }
+
+/* ------- Entry form -------- */
+.entry { width: 95%; }
+div.rowe { clear: right; padding-top: 10px; }
+div.rowe span.label { float: left; width: 15%; text-align: right; }
+div.rowe span.formw { float: right; width: 84%; text-align: left; padding-right: 5px; }
+div.rowe span.formw input, div.rowe span.formw textarea { width: 100%; }
+div.rowe span.formw select { width: 30%; }
+
+/* ---- classes ----*/
+.clear { clear: both; height: 1px; overflow: hidden; margin: 0; padding: 0; }
+.error { color: #ff0000; font-style: italic; font-weight: bold; background-color: #fff; }
+.msgs { color: blue; font-style: italic; font-weight: bold; background-color: #fff; }
+.plain, .plain a { font-size: small; border: 0; }
+.plain a { text-decoration: underline; }
+
+/* ---- dev tools ----*/
+#output textarea, iframe { width: 90%; border: none; padding: 2px 2px 0px; font-family: sans-serif; color: white; background-color: black; }
+

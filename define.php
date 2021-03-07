@@ -37,7 +37,7 @@
 /*
  * Package version.
  */
-define('PCH_VERSION', '2.0.11-beta');
+define('PCH_VERSION', '2.1.2 (OpenSSL)');
 
 /*
  * Check that script is not called directly.
@@ -62,8 +62,9 @@ define('PCH_FS_TEMPLATES'  , PCH_FS_HOME . 'templates'  . DIRECTORY_SEPARATOR);
 define('PCH_FS_TEMPLATES_C', PCH_FS_HOME . 'templates_c'. DIRECTORY_SEPARATOR);
 define('PCH_FS_LIBS'       , PCH_FS_HOME . 'libs'       . DIRECTORY_SEPARATOR);
 define('PCH_FS_CIPHER'     , PCH_FS_LIBS . 'cipher'     . DIRECTORY_SEPARATOR);
-define('PCH_FS_HORDE'      , PCH_FS_LIBS . 'Horde'      . DIRECTORY_SEPARATOR);
-define('SMARTY_DIR'        , PCH_FS_LIBS . 'smarty'     . DIRECTORY_SEPARATOR);
+//define('PCH_FS_HORDE'      , PCH_FS_LIBS . 'Horde'      . DIRECTORY_SEPARATOR);
+define('SMARTY_DIR'        , PCH_FS_LIBS . 'smarty-3.1.13'     . DIRECTORY_SEPARATOR);
+//define('SMARTY_DIR'        , '/smarty-3.1.13'	. DIRECTORY_SEPARATOR);
 
 /*
  * Miscellaneous constants.
@@ -71,16 +72,19 @@ define('SMARTY_DIR'        , PCH_FS_LIBS . 'smarty'     . DIRECTORY_SEPARATOR);
 define('DBTABLEINCLUDE'  , true);
 define('PCH_COOKIE_DATA' , 'PchData');
 define('PCH_THEME'       , 'PchTheme');
-define('PCH_VERSION_REQ' , '4.3.0');
+define('PCH_VERSION_REQ' , '7.0.0');
 define('PCH_INVALID_DATA', '-invalid-');
 define('PCH_ID_LENGTH'   , 32);
 
 /*
- * Include MySQL Database connection information.
+ * Include SQL Database connection information.
  */
+
 $includes_files = array(
-    array(PCH_FS_LIBS      . 'Database_MySQL.class.php',
-        'Cannot find database file.'),
+    //array(PCH_FS_LIBS      . 'Database_MySQL.class.php',
+    //    'Cannot find database file.'),
+    array(PCH_FS_LIBS      . 'Database_PDO.class.php',
+        'Cannot find PDO database file.'),	
     array(PCH_FS_LIBS      . 'ValidateRequests.class.php',
         'Cannot find Validate Requests file.'),
     array(PCH_FS_LIBS      . 'Pch_Control.class.php',
@@ -107,7 +111,7 @@ foreach ($includes_files as $value) {
 /*
  * Initialize objects and message arrays.
  */
-$pch    =& new Pch_Main();
+$pch    = new Pch_Main();
 
 $errors = array();
 $msgs   = array();

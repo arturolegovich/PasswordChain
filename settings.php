@@ -31,7 +31,7 @@ if (is_file(PCH_FS_HOME . 'define.php')) {
 } else {
     die("Cannot find define.php file.\n");
 }
-$page = 'settings';
+$page = 'Настройки';
 if (!$pch->auth()) {
 	$pch->redirect();
 }

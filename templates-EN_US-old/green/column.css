@@ -1,0 +1,184 @@
+/* --- Top layers --- */
+#titlebar {
+	background-color: #8de589;
+	font-size: x-large;
+	color: #fff;
+	padding: 4px 15px 2px
+}
+#menubar {
+	background-color: #289922;
+	height: 30px;
+	color: #fff;
+	font-weight: bold;
+}
+span.menuleft {
+	float: left;
+	text-align: left;
+	padding: 2px 15px;	
+}
+span.menuright {
+	float: right;
+	text-align: right;
+	padding: 2px 15px;
+}
+#nossl {
+	text-align: center;
+	font-size: medium;
+	background-color: #FF0000;
+	padding: 2px 15px;
+}
+/* --- Sidebar --- */
+#sidebar {
+    padding: 0;
+    padding-top: 5px;
+	text-align: center;
+    width: 160px;
+    float: left;
+	z-index: 1;
+}
+#groups {
+	padding: 2px;
+	background-image : url(./img/yellowfilter.gif);
+	border: thin solid #000;
+	font-weight: bold;
+	margin-bottom: 5px;
+	text-align: left;
+}
+#groups form {
+	text-align: center;
+}
+#groups ul {
+	margin: 0;
+	padding: 0;
+    list-style-type: none;
+    text-align: left;
+    width: 100%;
+}
+#groups li {
+    margin: 0;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    border-left: 2px solid #aaa;
+}
+#groups a {
+    display: block;
+    padding: 2px 5px;
+    text-decoration: none;
+}
+#groups a:link, #groups a:visited {
+    text-decoration: none;
+}
+#selected a {
+    background-color: #fa6b14;
+    border-right: 10px solid #289922;
+}
+#groups a:hover {
+	background-color: #faa614;
+	color: #fff;
+    border-right: 10px solid #289922;
+}
+.other {
+	background-image : url(./img/orangefilter.gif);
+	border: thin solid #000;
+	font-weight: bold;
+	color: #000;
+	margin-bottom: 5px;
+}
+.other p {
+	text-align: center;
+}
+/* ------- Main content -------- */
+#content {
+	margin-top: 5px;
+	margin-left: 165px;
+	margin-bottom: 5px;
+	padding: 0;
+	text-align: center;
+	background-color: #3dd235;
+	border: solid #3dd235;
+}
+#content th {
+    background-color: #289922;
+    border: 1px solid #8de589;
+    border-bottom: 0;
+    color: #fff;
+    font: bold 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 6px 6px 6px 12px;
+}
+.entries {
+    border: 0;
+    background: #8de589;
+    text-align: left;
+    width: 99%;
+    font-size: 95%;
+}
+.entries a {
+    color: blue;
+}
+.entryodd a:hover {
+    background-color: #dff6bd;
+}
+.entryeven a:hover {
+    background-color: #fdfed0;
+}
+.entryodd {
+    background-color: #fdfed0;
+    color: #000;
+}
+.entryeven {
+    background-color: #dff6bd;
+    color: #000;
+}
+.passwordodd {
+    color: #fdfed0;
+}
+.passwordeven {
+    color: #dff6bd;
+}
+.passwordshow {
+    color: #000;
+}
+/* GNU General Public License */
+#gpl {
+    text-align: left;
+    font-family: sans-serif;
+}
+/* ------- Footer -------- */
+.footer {
+	background: url(./img/orangefilter.gif);
+	font: x-small bold;
+	color: #000;
+	padding: 2px 10px;
+	clear: both;
+	height: 100px;
+	min-height: 51px;
+}
+.footer a {
+	color: #000;
+	text-decoration: none;
+}
+#foot-credits, #foot-copy {
+    display: inline;
+}
+#foot-credits {
+    padding-right: 10px;
+    padding-top: 10px;
+    width: 50%;
+    text-align: left;
+    float: left;
+}
+#foot-copy {
+    margin-left: 10px;
+    margin-top: 10px;
+    padding: 1px;
+    font: bold small bolder;
+    width: 45%;
+    text-align: right;
+    float: right;
+}
+#stats {
+    background-color: #fff;
+}

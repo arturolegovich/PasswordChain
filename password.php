@@ -61,6 +61,6 @@ if (!empty($newkey) || !empty($newkey2)) {
 /*
  * Parse Smarty Header template.
  */
-$pch->display('password', 'Change Password');
+$pch->display('password', 'Смена пароля');
 
 ?>

@@ -1,28 +1,6 @@
 <?php
 /**
  * MySQL Database table structure.
- *
- * This file is part of phpChain.
- *
- * phpChain is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * phpChain is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with phpChain; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * @package   phpChain
- * @version   $Id: db.tables.inc.php,v 1.23 2006/01/13 06:42:16 gogogadgetscott Exp $
- * @link      http://phpchain.sourceforge.net/
- * @author    Scott Greenberg <me@gogogadgetscott.com>
- * @copyright Copyright (c) 2005-2006. SEG Technology. All rights reserved.
  */
 
 /* 
@@ -55,9 +33,9 @@ $db_tables[$table_name]['structure']  =
     . sch_add_field('userid'    , 'VARCHAR(32) NOT NULL')
     . sch_add_field('user'      , 'VARCHAR(45) NOT NULL')
     . sch_add_field('teststring', 'TEXT')
-    . sch_add_field('iv'        , 'VARCHAR(16) NOT NULL')
+    . sch_add_field('iv'        , 'VARCHAR(256) NOT NULL')
     . sch_add_primary('userid'  , true)
-    . ') TYPE=MyISAM'
+    . ') ENGINE=MyISAM DEFAULT CHARSET=utf8'
     . ' COMMENT = \'Application authorized users and settings.\'';
 
 $table_name = PCH_TABLE_LOG;
@@ -72,7 +50,7 @@ $db_tables[$table_name]['structure']  =
     . sch_add_field('outcome'   , 'TINYINT UNSIGNED NOT NULL')
     . sch_add_primary('logid')
     . sch_add_key  ('outcome'   , 'user, outcome', false, true)
-    . ') TYPE=MyISAM'
+    . ') ENGINE=MyISAM DEFAULT CHARSET=utf8'
     . ' COMMENT = \'Login history.\'';
 
 $table_name = PCH_TABLE_SETTINGS;
@@ -82,12 +60,12 @@ $db_tables[$table_name]['structure']  =
     . sch_add_field('userid'    , 'VARCHAR(32) NOT NULL')
     . sch_add_field('pwmask'    , 'TINYINT(1) NOT NULL DEFAULT 1')
     . sch_add_field('clipboard' , 'TINYINT(1) NOT NULL DEFAULT 1')
-    . sch_add_field('generate'  , 'SMALLINT NOT NULL DEFAULT 8')
-    . sch_add_field('defaultiv' , 'VARCHAR(16) NOT NULL')
+    . sch_add_field('generate'  , 'SMALLINT NOT NULL DEFAULT 10')
+    . sch_add_field('defaultiv' , 'VARCHAR(256) NOT NULL')
     . sch_add_field('defaultun' , 'TEXT')
-    . sch_add_field('expire'    , 'INT UNSIGNED NOT NULL DEFAULT 300')
+    . sch_add_field('expire'    , 'INT UNSIGNED NOT NULL DEFAULT 1800')
     . sch_add_primary('userid'  , true)
-    . ') TYPE=MyISAM'
+    . ') ENGINE=MyISAM DEFAULT CHARSET=utf8'
     . ' COMMENT = \'User settings.\'';
 
 $table_name = PCH_TABLE_ICONS;
@@ -98,7 +76,7 @@ $db_tables[$table_name]['structure']  =
     . sch_add_field('title'    , 'VARCHAR(64) NOT NULL')
     . sch_add_field('icon'     , 'TEXT')
     . sch_add_primary('iconid', true)
-    . ') TYPE=MyISAM'
+    . ') ENGINE=MyISAM DEFAULT CHARSET=utf8'
     . ' COMMENT = \'Group and entry icons.\'';
 
 $table_name = PCH_TABLE_GROUPS;
@@ -106,7 +84,7 @@ $db_tables[$table_name]['table_name'] = $table_name;
 $db_tables[$table_name]['structure']  =
       sch_add_table($db_tables[$table_name]['table_name'])
     . sch_add_field('groupid'   , 'MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT')
-    . sch_add_field('iv'        , 'VARCHAR(16) NOT NULL')
+    . sch_add_field('iv'        , 'VARCHAR(256) NOT NULL')
     . sch_add_field('userid'    , 'VARCHAR(32) NOT NULL')
     . sch_add_field('parentid'  , 'MEDIUMINT UNSIGNED NOT NULL')
     . sch_add_field('iconid'    , 'MEDIUMINT UNSIGNED NOT NULL')
@@ -114,7 +92,7 @@ $db_tables[$table_name]['structure']  =
     . sch_add_field('ciphertext', 'TEXT')
     . sch_add_primary('groupid')
     . sch_add_key('userid', '', false, true)
-    . ') TYPE=MyISAM'
+    . ') ENGINE=MyISAM DEFAULT CHARSET=utf8'
     . ' COMMENT = \'Entry groups.\'';
    
 $table_name = PCH_TABLE_ENTRIES;
@@ -122,13 +100,13 @@ $db_tables[$table_name]['table_name'] = $table_name;
 $db_tables[$table_name]['structure']  =
       sch_add_table($db_tables[$table_name]['table_name'])
     . sch_add_field('entryid'   , 'VARCHAR(32) NOT NULL')
-    . sch_add_field('iv'        , 'VARCHAR(16) NOT NULL')
+    . sch_add_field('iv'        , 'VARCHAR(256) NOT NULL')
     . sch_add_field('userid'    , 'VARCHAR(32) NOT NULL')
     . sch_add_field('iconid'    , 'MEDIUMINT UNSIGNED NOT NULL')
     . sch_add_field('ciphertext', 'TEXT')
     . sch_add_primary('entryid')
     . sch_add_key  ('userid', '', false, true)
-    . ') TYPE=MyISAM'
+    . ') ENGINE=MyISAM DEFAULT CHARSET=utf8'
     . ' COMMENT = \'Entries.\'';
 
 $table_name = PCH_TABLE_ENTRIES_TO_GROUPS;
@@ -141,7 +119,7 @@ $db_tables[$table_name]['structure']  =
     . sch_add_primary('linkid')
     . sch_add_key  ('groupid')
     . sch_add_key  ('entryid', '', false, true)
-    . ') TYPE=MyISAM'
+    . ') ENGINE=MyISAM DEFAULT CHARSET=utf8'
     . ' COMMENT = \'Relation table for many-to-many entries/categories.\'';
 
 /*
@@ -171,7 +149,7 @@ if (class_exists('Text_Highlighter')) {
          'numbers' => HL_NUMBERS_TABLE,
          'tabsize' => 4,
      );
-    $renderer =& new Text_Highlighter_Renderer_HTML($options);
+    $renderer = new Text_Highlighter_Renderer_HTML($options);
     $renderer->_defClass = '';
     $highlighter =& Text_Highlighter::factory('mysql');
     $highlighter->setRenderer($renderer);

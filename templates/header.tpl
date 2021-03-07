@@ -4,7 +4,8 @@
        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="yandex-verification" content="e8fc629938fb2f2a" />
     <title>{$site_name|default:$app_name} - {$doc_name|default:"Page"}</title>
 	<link rel="shortcut icon" href="{$urlImages}favicon.ico" />
     <link rel="stylesheet" type="text/css" href="{$urlTemplate}style.css" media="all" />

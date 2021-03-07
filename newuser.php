@@ -81,6 +81,6 @@ $pch->assign('newUser', $newuser);
 /*
  * Parse Smarty Header template.
  */
-$pch->display('newuser', 'New User');
+$pch->display('newuser', 'Регистрация');
 
 ?>

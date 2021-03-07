@@ -177,7 +177,7 @@ default: // view
 		$pch->display('entries.' . $output, 'Output Entries', false,
             'application/xml');
 	} else {
-    	$pch->display('entries.' . $output, 'Viewing Entries');
+    	$pch->display('entries.' . $output, 'Просмотр записей');
     }
     break;
 }

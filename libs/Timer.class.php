@@ -68,7 +68,7 @@ var $maxStringLength = 0;
  * @param  boolean $auto
  * @access public
  */
-function Benchmark_Timer($auto = false)
+function __construct($auto = false)
 {
     $this->auto = $auto;
 
@@ -83,7 +83,7 @@ function Benchmark_Timer($auto = false)
  *
  * @access private
  */
-function _Benchmark_Timer()
+function __destruct()
 {
     if ($this->auto) {
         $this->stop();

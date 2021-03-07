@@ -88,12 +88,9 @@ var $entry;
  * @return obj     New instance of Pch_Import class
  * @access private
  */
-function Pch_Import($param = array())
+function __construct($param = array())
 {
-    /*
-     * Call base constructor.
-     */
-    $this->FileUploader();
+
 }
 
 /**
@@ -102,7 +99,7 @@ function Pch_Import($param = array())
  * @return void
  * @access private
  */
-function _Pch_Import()
+function __destruct()
 {
 
 }

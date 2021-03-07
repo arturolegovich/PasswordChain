@@ -32,7 +32,7 @@
  * v2.4   - Added error messgae language preferences
  * v2.3.1 - Bugfix for upload $path in $this->save_file()
  * v2.3   - Initialized all variables (compatibale with PHP error notices)
- * v2.2   - Changed ereg() to stristr() whenever possible
+ * v2.2   - Changed preg_match() to stristr() whenever possible
  *
  * @package     phpChain
  * @copyright   Copyright 1999, 2002, 2003 David Fox, Dave Tufts
@@ -106,7 +106,7 @@ var $max_image_height;
  *                $f = new uploader('da');    // Danish error messages
  * 
  */
-function FileUploader($language = 'en')
+function __construct($language = 'en')
 {
     $this->language = strtolower($language);
     $this->error    = '';
@@ -245,7 +245,7 @@ function upload($filename = '', $accept_type = '', $extention = '')
             default:
                 $this->file['extention'] = $extention; break;
         }
-    } elseif (!ereg("(\.)([a-z0-9]{3,5})$", $this->file['name']) && !$extention) {
+    } elseif (!preg_match("/(\.)([a-z0-9]{3,5})$/", $this->file['name']) && !$extention) {
         // Try and autmatically figure out the file type
         // For more on mime-types: http://httpd.apache.org/docs/mod/mod_mime_magic.html
         switch($this->file['type']) {
@@ -309,7 +309,7 @@ function save_file($path, $overwrite_mode = "3")
             
     if ($this->accepted) {
         // Clean up file name (only lowercase letters, numbers and underscores)
-        $this->file['name'] = ereg_replace("[^a-z0-9._]", '',
+        $this->file['name'] = preg_replace("/[^a-z0-9._]/", '',
             str_replace(" ", "_", str_replace("%20", "_", 
             strtolower($this->file['name']))));
         
@@ -319,7 +319,7 @@ function save_file($path, $overwrite_mode = "3")
         }
         
         // get the raw name of the file (without its extenstion)
-        if (ereg("(\.)([a-z0-9]{2,5})$", $this->file['name'])) {
+        if (preg_match("/(\.)([a-z0-9]{2,5})$/", $this->file['name'])) {
             $pos = strrpos($this->file['name'], ".");
             if (!$this->file['extention']) {
                 $this->file['extention'] = substr($this->file['name'], $pos, strlen($this->file['name']));

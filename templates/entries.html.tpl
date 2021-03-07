@@ -1,13 +1,13 @@
-{* phpChain - Smarty Template *}
+﻿{* phpChain - Smarty Template *}
 {* $Id: entries.html.tpl,v 1.9 2006/02/27 04:39:51 gogogadgetscott Exp $ *}
 {if $groupid eq -2}
-    <span class="heading1">Search</span>
+    <span class="heading1">Поиск</span>
     <div class="entry">
         <form action="{$urlHome}entries{$file_ext}" method="post">
             <input type="hidden" name="action" value="search" />
             <input type="hidden" name="groupid" value="-2" />
             <div class="rowe">
-                <span class="label">Search for this text:</span>
+                <span class="label">Текст для поиска:</span>
                 <span class="formw">
                     <input type="text" name="search" value="{if $search}{$search|escape:"htmlall"}{/if}" />
                 </span>
@@ -15,7 +15,7 @@
             <span class="clear">&nbsp;</span>
             <div class="row">
                 <span class="formw">
-                    <input name="submit" type="submit" value="Search" />
+                    <input name="submit" type="submit" value="Поиск" />
                 </span>
             </div>
             <span class="clear">&nbsp;</span>
@@ -28,9 +28,9 @@
     <!-- Entries table -->
     <table id="entries" class="entries" cellpadding="0" cellspacing="0">
         <tr>
-            <th colspan="2" align="center" width="1%">Action&nbsp;</th>
+            <th colspan="2" align="center" width="1%">Действие&nbsp;</th>
 	        <th>
-	        	Title
+	        	Название
                 <a href="{$urlHome}entries{$file_ext}?groupid={$groupid}&sort=title&order=SORT_ASC#entries">
                     <img src="{$urlImages}s_asc{if $sort_flag!="SORT_ASC" || $sort_col!="title"}_n{/if}.png" alt="Sort Ascending" width="11" height="9" />
                 </a>
@@ -39,7 +39,7 @@
                 </a>
 			</th>
             <th>
-				Login
+				Логин
                 <a href="{$urlHome}entries{$file_ext}?groupid={$groupid}&sort=login&order=SORT_ASC#entries">
                     <img src="{$urlImages}s_asc{if $sort_flag!="SORT_ASC" || $sort_col!="login"}_n{/if}.png" alt="Sort Ascending" width="11" height="9" />
                 </a>
@@ -48,7 +48,7 @@
                 </a>
 			</th>
             <th>
-				Password
+				Пароль
                 <a href="{$urlHome}entries{$file_ext}?groupid={$groupid}&sort=password&order=SORT_ASC#entries">
                     <img src="{$urlImages}s_asc{if $sort_flag!="SORT_ASC" || $sort_col!="password"}_n{/if}.png" alt="Sort Ascending" width="11" height="9" />
                 </a>
@@ -62,7 +62,7 @@
     	<tr class="entry{$class}">
     	   {strip}
             <td align="center">
-    	        <a href="{$urlHome}entries{$file_ext}?action=edit&entryid={$entries[entry].entryid}" title="Edit Entry">
+    	        <a href="{$urlHome}entries{$file_ext}?action=edit&entryid={$entries[entry].entryid}" title="Редактирование записей">
                     <img src="{$urlImages}edit.gif" alt="Edit" width="16" height="16" />
                 </a>
     	    </td>
@@ -110,7 +110,7 @@
     <!-- END Entries table -->
 {else}
     <p>
-        No data found.
+        Ничего не найдено.
     </p>
 {/if}
 

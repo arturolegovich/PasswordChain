@@ -2,46 +2,44 @@
 {include file=$file_errors action="updating password"}
 {if $action == "complete"}
     <p>
-     Password changed!
+     Пароль изменён!
     </p>
     <p>
-     You will now need to login using your new password.
+     После смены пароля необходимо выполнить вход с использованием нового пароля.
     </p>
 {else}
     <p>
-        Changing your password requires all data in
-        the database under your login to be decrypted and re-encrypted. This
-        process can take some time if you have a lot of entries. Do not hit
-        stop or close your browser after entering your new password, or data
-        loss may occur.
+		Изменение пароля повлечёт за собой расшифровку всех записей вашего аккаунта в базе данных 
+		с последующим шифрованием всех записей с использованием нового пароля.
+        Этот процесс может занять некоторое время в зависимости от количества записей. Не завершайте работу браузера
+		и не закрывайте его, пока процесс не будет завершен, а иначе можно потерять данные.
     </p>
     <p>
-        Password must be at least 3 characters and no more then 255 characters long.
+        Пароль должен состоять не менее чем из 3 символов и не более чем из 255 символов.
     </p>
     <div class="user">
     	<form action="{$urlSelf}" method="post">
     	   <input type="hidden" name="action" value="save" />
             <div class="row">
-                <span class="label">New Password:</span>
+                <span class="label">Новый пароль:</span>
                 <span class="formw">
                     <input name="newkey" type="password" maxlength="255" size="30" value="" />
                 </span>
             </div> 
             <div class="row">
-                <span class="label">Verify new password: </span>
+                <span class="label">Проверка нового пароля: </span>
                 <span class="formw">
                     <input name="newkey2" type="password" maxlength="255" size="30" value="" />
                 </span>
             </div> 
             <div class="row">
-                <input name="submit" type="submit" value="Change password" />
+                <input name="submit" type="submit" value="Сменить пароль" />
             </div>
             <span class="clear">&nbsp;</span>
         </form>
     </div>
     <p>
-        <b>Passwords</b> can contain any of the 95 ANSI printable characters
-        except spaces (/^[\41-\176]+/i).
+        <b>Пароли</b> должны состоять из любых печатных символов ANSI кроме пробелов (/^[\41-\176]+/i).
     </p>
 {/if}
     <span class="clear">&nbsp;</span>

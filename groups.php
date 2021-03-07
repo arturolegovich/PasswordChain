@@ -30,7 +30,7 @@ if (is_file(PCH_FS_HOME . 'define.php')) {
 } else {
   die("Cannot find define.php file.\n");
 }
-$page = 'Group Management';
+$page = 'Управление группами';
 if (!$pch->auth()) {
 	$pch->redirect();
 }

@@ -1,32 +1,9 @@
 <?php
-/**
- * Site Configuration.
- *
- * This file is part of phpChain.
- *
- * phpChain is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * phpChain is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with phpChain; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * @package    phpChain
- * @version    $Id: config.dist.php,v 1.10 2006/01/10 00:52:44 gogogadgetscott Exp $
- * @link       http://phpchain.sourceforge.net/
- * @author     Scott Greenberg <me@gogogadgetscott.com>
- * @copyright  Copyright (c) 2005-2006. SEG Technology. All rights reserved.
- */
-/*
- * Check that script is not called directly.
- */
+// EN: Web-app Settings.
+// RU: Настройки веб-приложения.
+
+// EN: Protection of the script from direct execution.
+// RU: Защита скрипта от прямого исполнения.
 if (strpos($_SERVER['SCRIPT_NAME'], basename(__FILE__)) !== false
 	|| !is_object($pch)) {
     header('location: ../index.php');
@@ -39,6 +16,15 @@ if (strpos($_SERVER['SCRIPT_NAME'], basename(__FILE__)) !== false
  */
 // -----------------------------------------------------------------------------
 
+/*
+ * Enter PDO Database Driver (sqlite, pgsql, mysql).
+ Not yet working with pdo, only php_mysqli. Need update code for php_pdo.
+ */
+$pch->dbDriver('mysql');
+/*
+ * Enter sqlite filename (if using sqlite)
+ */
+$pch->dbFile('/opt/var/phpchain.sqlite3');
 /*
  * Enter MySQL Database Host.
  */
@@ -62,7 +48,7 @@ $pch->dbName('phpchain');
  * Site name for title for documents. Shown in both browser title and page 
  * header.
  */
-$pch->assign('site_name', 'phpChain');
+$pch->assign('site_name', 'PasswordChain');
 /*
  * Set default theme.
  */
@@ -121,9 +107,18 @@ $pch->assign('date_format', '%a, %d %B %I:%M %p');
  * Desired algorithm used for encryption.
  * Once database is setup this cannot be changed. Do so will prevent data from 
  * being accessed and decrypted.
- * Value options: Blowfish, Cast_256, Rijndael_256, Twofish
+ * Value options: bf-cbc, grasshopper-cbc
  */
-$pch->algorithm('Blowfish');
+$pch->algorithm('grasshopper-cbc');
+
+/*
+ * Desired hash-algorithm (method digest) used with algorithm option for encryption.
+ * Once database is setup this cannot be changed. Do so will prevent data from 
+ * being accessed and decrypted.
+ * Value options: md5, md_gost12_256
+ * Default value: md5
+ */
+$pch->digestalgo('md_gost12_256');
 
 // -----------------------------------------------------------------------------
 

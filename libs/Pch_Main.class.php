@@ -78,6 +78,18 @@ var $_theme;
  */
 var $_debug_style;
 
+/**
+ * @var    string  DataBase Driver for SQL.
+ * @access private
+ */
+var $_dbDriver;
+
+/**
+ * @var    string  DataBase File for sqlite.
+ * @access private
+ */
+var $_dbFile;
+
 // -----------------------------------------------------------------------------
 //                      Constructor/Destructor.
 // -----------------------------------------------------------------------------
@@ -90,26 +102,25 @@ var $_debug_style;
  * @return obj     New instance of class.
  * @access private
  */
-function Pch_Main($param = array())
+public function __construct($param = array())
 {
-    $param['seed'] = true;
     /*
-     * Initialize base object.
+     * Initialize Pch_Control class.
      */
-    $this->Pch_Control($param);
+    parent::__construct($param);
     /*
      * Initialize timer object.
      */
-    $this->_timer =& new Benchmark_Timer();
+    $this->_timer = new Benchmark_Timer();
     $this->_timer->start();
     /*
      * Initialize HTTP header object. 
      */
-    $this->_header =& new GoGo_Send_HTTP_Headers();
+    $this->_header = new GoGo_Send_HTTP_Headers();
     /*
-     * Initialize smarty object.
+     * Initialize Smarty object.
      */
-    $this->_smarty =& new Smarty();
+    $this->_smarty = new Smarty();
     /*
      * Setup paths.
      */
@@ -122,9 +133,10 @@ function Pch_Main($param = array())
     /*
      * Define Smarty variables.
      */
-    $this->assign('app_name'  , 'phpChain');
+    $this->assign('app_name'  , 'PasswordChain');
     $this->assign('app_ver'   , PCH_VERSION);
-    $this->assign('app_url'   , 'http://phpchain.sourceforge.net/');
+	$this->assign('openssl_ver'   , $this->openssl_version());
+    $this->assign('app_url'   , 'https://phpchain.ru/');
     $this->assign('date_now'  , gmdate('D, d M Y H:i:s') . ' GMT');
     $this->assign('file_ext'  , '');
     /*
@@ -148,7 +160,7 @@ function Pch_Main($param = array())
     /*
      * Initialize validate object. Used to retrieve user input.
      */
-    $this->_validate =& new ValidateRequests();
+    $this->_validate = new ValidateRequests();
     /*
      * Handle errors.
      */
@@ -163,17 +175,6 @@ function Pch_Main($param = array())
     }
 }
 
-/**
- * Class Destructor.
- *
- * @return void
- * @access private
- */
-function _Pch_Main()
-{
-    $this->_Pch_Control();
-}
-
 // -----------------------------------------------------------------------------
 //                        Accessor methods.
 // -----------------------------------------------------------------------------
@@ -186,7 +187,7 @@ function _Pch_Main()
  * @return void
  * @access public
  */
-function debug($value = false, $style = 'popup')
+public function debug($value = false, $style = 'popup')
 {
     if (is_null($value)) {
         return $this->_db->debug();
@@ -211,7 +212,7 @@ function debug($value = false, $style = 'popup')
  * @param  string Theme name.
  * @return string Theme name.
  */
-function theme($theme = null)
+public function theme($theme = null)
 {
     if (!is_null($theme)) {
         /*
@@ -240,7 +241,7 @@ function theme($theme = null)
          */
         $this->_smarty->template_dir = PCH_FS_TEMPLATES;
         $this->_smarty->compile_dir  = PCH_FS_TEMPLATES_C;
-        $this->_smarty->debug_tpl    = $this->_smarty->template_dir . 'debug.tpl';
+        $this->_smarty->debug_tpl    = implode(", ",$this->_smarty->template_dir) . 'debug.tpl';
         $this->assign('urlSelf'      , $this->urlSelf(false, false, false));
         $this->assign('urlHome'      , PCH_WS_HOME);
         $this->assign('urlTemplate'  , PCH_WS_TEMPLATES);
@@ -260,7 +261,7 @@ function theme($theme = null)
  * @param array|string $tpl_var the template variable name(s)
  * @param mixed $value the value to assign
  */
-function assign($tpl_var, $value = null)
+public function assign($tpl_var, $value = null)
 { // BEGIN function assign
     $this->_smarty->assign($tpl_var, $value);
 } // END function assign
@@ -275,12 +276,12 @@ function assign($tpl_var, $value = null)
  * @return void
  * @access public
  */
-function display($resource_name, $doc_name = '', $show_templete = true, 
+public function display($resource_name, $doc_name = '', $show_templete = true, 
     $xtype = 'text/html')
 {
     global $action, $errors, $msgs;
     if (!$this->_debug) {
-        $this->_smarty->load_filter('output', 'trimwhitespace');
+        $this->_smarty->loadfilter('output', 'trimwhitespace');
     }
     $this->setMarker('Enter Pch_Main::display');
     $resource_name = $resource_name . '.tpl';
@@ -356,7 +357,6 @@ function display($resource_name, $doc_name = '', $show_templete = true,
     }
     $this->_header->contentLength(strlen($source));
     echo $source;
-    $this->_Pch_Control();
 }
 
 /**
@@ -366,7 +366,7 @@ function display($resource_name, $doc_name = '', $show_templete = true,
  * @return string Template results.
  * @access private
  */
-function _fetch($resource_name)
+private function _fetch($resource_name)
 {
     if (!empty($this->_theme)) {
         $tmp_path = $this->_theme . DIRECTORY_SEPARATOR . $resource_name;
@@ -384,7 +384,7 @@ function _fetch($resource_name)
  * @return mixed  Requested data.
  * @access public
  */
-function reqData($fieldname, $source = VR_ANY, $type = VR_NONE, $default = '')
+public function reqData($fieldname, $source = VR_ANY, $type = VR_NONE, $default = '')
 { // BEGIN function reqData
     return $this->_validate->reqData($fieldname, $source, $type, $default);
 } // END function reqData
@@ -398,7 +398,7 @@ function reqData($fieldname, $source = VR_ANY, $type = VR_NONE, $default = '')
  * @return bool   
  * @access public
  */
-function isLength($value = '', $min = 0, $max = 1)
+public function isLength($value = '', $min = 0, $max = 1)
 { // BEGIN function isLength
     return $this->_validate->isLength($value, $min, $max);
 } // END function isLength
@@ -409,7 +409,7 @@ function isLength($value = '', $min = 0, $max = 1)
  * @param  string Name of the marker to be set.
  * @access public
  */
-function setMarker($name = '')
+public function setMarker($name = '')
 { // BEGIN function setMarker
     $this->_timer->setMarker($name);
 } // END function setMarker
@@ -419,7 +419,7 @@ function setMarker($name = '')
  *
  * @access public
  */
-function displayProfile()
+public function displayProfile()
 { // BEGIN function displayProfile
     $this->_timer->display();
 } // END function displayProfile
@@ -433,7 +433,7 @@ function displayProfile()
  * @return string
  * @access public
  */
-function getDuration($start, $end, $units = false)
+public function getDuration($start, $end, $units = false)
 { // BEGIN function getDuration
     return $this->_timer->getDuration($start, $end, $units);
 } // END function getDuration
@@ -450,7 +450,7 @@ function getDuration($start, $end, $units = false)
  * @access public
  * @todo echo html redirect w/ href link in the case that the header fails.
  */
-function redirect($url = '')
+public function redirect($url = '')
 { // BEGIN function redirect
     if (empty($url)) {
         $url = PCH_WS_HOME . 'index.php';
@@ -469,7 +469,7 @@ function redirect($url = '')
  * @param string Whether to force ssl url.
  * @return string Current url w/ parameters.
  */
-function urlSelf($newVars = false, $strip = false, $host = '',
+public function urlSelf($newVars = false, $strip = false, $host = '',
     $fource_ssl = false)
 {
     $urlSelf = '';
@@ -561,7 +561,7 @@ function urlSelf($newVars = false, $strip = false, $host = '',
  *
  * @return bool true is database is setup correctly.
  */
-function checkSetup()
+public function checkSetup()
 { // BEGIN function checkSetup
     /**
      * @todo Investigate fast method to determine if db is setup for app.
@@ -588,7 +588,7 @@ function checkSetup()
  * @return void
  * @access public
  */
-function getCookies()
+public function getCookies()
 {
     $data = $this->_validate->reqData(PCH_COOKIE_DATA, VR_COOKIE, VR_MIXED);
     $data = explode('.', $data);
@@ -621,7 +621,7 @@ function getCookies()
  * @return Whether cookie are set.
  * @access public
  */
-function setCookies()
+public function setCookies()
 {    
     if (!$this->auth()) {
         $this->deleteCookie();
@@ -665,7 +665,7 @@ function setCookies()
  * @return void
  * @access public
  */
-function deleteCookie()
+public function deleteCookie()
 {
     $exp_time = time() - 3600;
     if (!headers_sent()) {
@@ -677,6 +677,34 @@ function deleteCookie()
     $this->clearAccessors();
     $this->assign('auth', false);
     $this->assign('user', '');
+}
+
+/**
+ * Get or set application DataBase SQL Driver.
+ *
+ * @param  string dbDriver name.
+ * @return string dbDriver name.
+ */
+
+public function dbDriver($dbDriver='mysql')
+{
+    if (!is_null($dbDriver)) 
+            $this->_dbDriver = $dbDriver;
+    return $this->_dbDriver;
+}
+
+/**
+ * Get or set application DataBase File for sqlite.
+ *
+ * @param  string dbFile path/name.
+ * @return string dbFile path/name.
+ */
+
+public function dbFile($dbFile=null)
+{
+    if (!is_null($dbFile)) 
+            $this->_dbFile = $dbFile;
+    return $this->_dbFile;
 }
 
 }  // END class Pch_Main

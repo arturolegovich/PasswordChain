@@ -1,35 +1,8 @@
 <?php
 /**
- * Control class that encapsulates database control to access and process data.
+ * EN: Control class that encapsulates database control to access and process data.
+ * RU: Класс для работы с базой данных.
  *
- * This file is part of phpChain.
- *
- * phpChain is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * phpChain is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with phpChain; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * @package    phpChain
- * @version    $Id: Pch_Control.class.php,v 1.25 2006/02/27 04:39:51 gogogadgetscott Exp $
- * @author     Scott Greenberg <me@gogogadgetscott.com>
- * @copyright  Copyright (c) 2005-2006. SEG Technology. All rights reserved.
- * @todo Add method to get number of entries (all or groupid).
- */
-/**
- * Base class for Pch_Main class.  Provides database control to access and
- * process data.
- *
- * @package    phpChain
- * @author     Scott Greenberg <me@gogogadgetscott.com>
  */
 class Pch_Control
 { // BEGIN class Pch_Control
@@ -54,7 +27,13 @@ var $_crypt;
  * @var    string Store algorithm type.
  * @access private
  */
-var $_algorithm;
+private $_algorithm;
+
+/**
+ * @var    string Store hash method.
+ * @access private
+ */
+var $_digestalgo;
 
 /**
  * @var    bool    Store authorization value.
@@ -147,12 +126,15 @@ var $debugInfo;
  * @return obj     New instance of Pch_Control class
  * @access private
  */
-function Pch_Control($param = array())
+function __construct($param = array())
 {
     /*
      * Initialize database object.
      */
-    $this->_db = &new Database_MySQL($param);
+    //$this->_db = new Database_MySQL($param); // old
+	$this->_db = new Database_PDO($param);
+	
+
     /*
      * Clear Accessors.
      */
@@ -167,18 +149,7 @@ function Pch_Control($param = array())
     } else {
         $this->algorithm();
     }
-    /*
-     * For sake of rand, mt_rand, MCRYPT_RAND and any other uses.
-     * Of course the php manual indicate, as of PHP 4.2.0, there is no need to
-     * seed the random number generator. However, why bother checking
-     * version when there's no harm in calling them as php will check seed
-     * to prevent re-seeding. It is important to only seed once. That being
-     * said, be sure no sub-classes seed.
-     */
-    if (isset($param['seed']) && $param['seed'] == true) {
-        $this->_crypt->seed();
-    }
-
+	
     $this->_evalues = array('login', 'password', 'title', 'url', 'notes');
 }
 
@@ -188,14 +159,19 @@ function Pch_Control($param = array())
  * @return void
  * @access private
  */
-function _Pch_Control()
+function __destruct()
 {
-    $this->_db->_Database_MySQL();
+    $this->_db->__destruct();
 }
 
 // -----------------------------------------------------------------------------
 //                                Properties.
 // -----------------------------------------------------------------------------
+
+public function openssl_version()
+{
+  return $this->_crypt->openssl_version();
+}
 
 /**
  * Setup encryption sub-class based on desired algorithm or get current
@@ -206,13 +182,11 @@ function _Pch_Control()
  * @access public
  * @todo Setup error handling in recieving (Pch_Main) class.
  */
-function algorithm($value = 'blowfish')
-{ // BEGIN function algorithm
-    if (!is_null($value)) {
-        $this->_crypt = new Pch_Cipher($value);
-    }
-    return $this->_handleProperties('_algorithm', $value);
-} // END function algorithm
+public function algorithm($value = null)
+{
+  $this->_crypt = new Pch_Cipher($value);
+  return $this->_handleProperties('_algorithm', $value);
+}
 
 /**
  * Get authorization value.
@@ -1260,7 +1234,7 @@ function generatePassword($length = 8, $valid = null)
         /*
          * Define default valid characters.
          */
-        $valid = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        $valid = '0123456789ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz';
     }
     $randData = $this->_crypt->genRandom($length, 0, strlen($valid) - 1);
     /*
@@ -1274,8 +1248,7 @@ function generatePassword($length = 8, $valid = null)
         /*
          * Pick a random character from the possible ones.
          */
-        $char = substr($valid, $randData[$i], 1);
-        $password .= $char;
+		$password .= substr($valid, $randData[$i], 1);
     }
     /*
      * Done.
@@ -1300,18 +1273,9 @@ function changePassword($newkey)
     if (empty($newkey) || $this->hashKey($newkey) == $this->key()) {
         return false;
     }
-    /*
-     * Create a new object to handle new user. Object cloning could be used,
-     * however it is avoided due to php version compatibility.
-     */
-    $tmpControl = new Pch_Control();
+	$tmpControl = clone $this;
     $tmpControl->debug($this->debug(null));
-    $tmpControl->dbHost($this->dbHost());
-    $tmpControl->dbUsername($this->dbUsername());
-    $tmpControl->dbPassword($this->dbPassword());
-    $tmpControl->dbName($this->dbName());
-    $tmpControl->algorithm($this->algorithm());
-    $tmpControl->keyPrefix($this->keyPrefix());
+	$tmpControl->clearAccessors();
     $user    = $this->user();
     $tmpUser = $user . '__';
     if (!$tmpControl->addUser($tmpUser, $newkey, $this->getSettings())) {
@@ -1343,6 +1307,12 @@ function changePassword($newkey)
     return true;
 } // END function changePassword
 
+/* Hash-function digest (md*) */
+function digestalgo($value=null)
+{
+  return $this->_handleProperties('_digestalgo', $value);
+}
+
 /**
  * Single line description of function hashKey.
  *
@@ -1356,7 +1326,7 @@ function changePassword($newkey)
  */
 function hashKey($value)
 { // BEGIN function hashKey
-    return md5($this->keyPrefix() . $value);
+	return $this->_crypt->mdHash($this->keyPrefix() . $value, $this->digestalgo());
 } // END function hashKey
 
 // -----------------------------------------------------------------------------

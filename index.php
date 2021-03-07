@@ -53,6 +53,6 @@ if ($pch->auth()) {
 /*
  * Parse Smarty templates.
  */
-$pch->display('index', 'Home');
+$pch->display('index', 'Главная страница');
 
 ?>

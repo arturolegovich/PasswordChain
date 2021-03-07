@@ -91,7 +91,7 @@ var $_last_value;
  * @return obj     New instance of class.
  * @access private
  */
-function ValidateRequests($param = array())
+function __construct($param = array())
 {
     if (!is_array($param)) {
         $param = array();
@@ -113,7 +113,7 @@ function ValidateRequests($param = array())
  * @return void
  * @access private
  */
-function _ValidateRequests()
+function __destruct()
 {
 }
 

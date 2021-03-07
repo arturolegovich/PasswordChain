@@ -1,6 +1,4 @@
-{* phpChain - Smarty Template *}
-{* $Id: entries.xml.tpl,v 1.6 2006/01/13 06:42:16 gogogadgetscott Exp $ *}
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <pwlist version="1.0">
 {section name=entry loop=$entries}
     <pwentry>

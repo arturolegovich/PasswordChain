@@ -1,21 +1,23 @@
-{* phpChain - Smarty Template *}
+﻿{* phpChain - Smarty Template *}
 {* $Id: debug.tpl,v 1.16 2006/01/13 06:42:16 gogogadgetscott Exp $ *}
-{assign_debug_info}
+{if $assign_debug_info}
+	{$assign_debug_info}
+{/if}
 {if isset($_smarty_debug_output) and $_smarty_debug_output eq "html"}
 <link rel="stylesheet" type="text/css" href="{$urlTemplate}debug.css" media="all" />
 <table class="debug">
     <tr>
         <th colspan="3">
-            {$app_name} Debug Console
+            {$app_name} Консоль отладки
         </th>
     </tr>
     <tr>
-        <td class="dsection" colspan="3">Database queries:</td>
+        <td class="dsection" colspan="3">Запросы к базе данных:</td>
     </tr>
     <tr class="dsection2">
-        <th>Query</th>
-        <th>Stack Frame</th>
-        <th>Time (ms)</th>
+        <th>Запрос</th>
+        <th>Стек</th>
+        <th>Время (мс)</th>
     </tr>
     {foreach name=queries from=$_debug_queries item=queries}
     <tr class="drow{if $smarty.foreach.queries.index is even}even{else}odd{/if}">
@@ -30,18 +32,18 @@
     </tr>
     {foreachelse}
     <tr>
-        <td class="dnone" colspan="3">No database queries performed.</td>
+        <td class="dnone" colspan="3">Нет запросов к базе данных.</td>
     </tr>
     {/foreach}
 </table>
 <table class="debug">
     <tr>
-        <td class="dsection" colspan="3">Profile/timer information:</td>
+        <td class="dsection" colspan="3">Профиль/таймер информация:</td>
     </tr>
     <tr class="dsection2">
-        <th>Marker</th>
-        <th>Time (ms)</th>
-        <th>Total (%)</th>
+        <th>Курсор</th>
+        <th>Время (мс)</th>
+        <th>Всего (%)</th>
     </tr>
     {foreach name=marker from=$profile item=marker}
     <tr class="drow{if $smarty.foreach.marker.index is even}even{else}odd{/if}">
@@ -53,13 +55,13 @@
     </tr>
     {foreachelse}
     <tr>
-        <td class="dnone" colspan="2">No profile created.</td>
+        <td class="dnone" colspan="2">Профиль не создан.</td>
     </tr>
     {/foreach}
 </table>	
 <table class="debug">
     <tr>
-        <td class="dsection" colspan="2">Assigned template variables:</td>
+        <td class="dsection" colspan="2">Назначенные переменные шаблона:</td>
     </tr>
     {counter assign="count" start=0 print=0}
 	{section name=vars loop=$_debug_keys}
@@ -82,13 +84,13 @@
         {/if}
 	{sectionelse}
 	    <tr>
-            <td class="dnone" colspan="2">No template variables assigned.</td>
+            <td class="dnone" colspan="2">Нет назначенных переменных шаблона.</td>
         </tr>
 	{/section}
 </table>
 <table class="debug">
     <tr>
-        <td class="dsection" colspan="2">Debug information:</td>
+        <td class="dsection" colspan="2">Отладочная информация:</td>
     </tr>
     <tr class="droweven">
         <td class="dvalue">
@@ -112,11 +114,11 @@ _smarty_console.document.write('<link rel="stylesheet" type="text/css" href="{$u
 +'<table class="debug">\n'
 +'    <tr>\n'
 +'        <th colspan="3">\n'
-+'            {$app_name} Debug Console\n'
++'            {$app_name} Консоль отладки\n'
 +'        </th>\n'
 +'    </tr>\n'
 +'    <tr>\n'
-+'        <td class="dsection" colspan="3">Database queries:</td>\n'
++'        <td class="dsection" colspan="3">Запросы к базе данных:</td>\n'
 +'    </tr>\n'
 +'    <tr class="dsection2">\n'
 +'        <th>Query</th>\n'
@@ -133,13 +135,13 @@ _smarty_console.document.write('    <tr class="drow{if $smarty.foreach.queries.i
 +'    </tr>\n');
       {foreachelse}
 _smarty_console.document.write('    <tr>\n'
-+'        <td class="dnone" colspan="3">No database queries performed.</td>\n'
++'        <td class="dnone" colspan="3">Нет запросов к базе данных.</td>\n'
 +'    </tr>\n');
       {/foreach}
 _smarty_console.document.write('</table>\n'
 +'<table class="debug">\n'
 +'    <tr>\n'
-+'        <td class="dsection" colspan="3">Profile/timer information:</td>\n'
++'        <td class="dsection" colspan="3">Профиль/таймер информация:</td>\n'
 +'    </tr>\n'
 +'    <tr class="dsection2">\n'
 +'        <th>Marker</th>\n'
@@ -156,13 +158,13 @@ _smarty_console.document.write('    <tr class="drow{if $smarty.foreach.marker.in
 +'    </tr>\n');
       {foreachelse}
 _smarty_console.document.write('    <tr>\n'
-+'        <td class="dnone" colspan="2">No profile created.</td>\n'
++'        <td class="dnone" colspan="2">Профиль не создан.</td>\n'
 +'    </tr>\n');
       {/foreach}
 _smarty_console.document.write('</table>\t\n'
 +'<table class="debug">\n'
 +'    <tr>\n'
-+'        <td class="dsection" colspan="2">Assigned template variables:</td>\n'
++'        <td class="dsection" colspan="2">Назначенные переменные шаблона:</td>\n'
 +'    </tr>\n');
 {counter assign="count" start=0 print=0}
 {section name=vars loop=$_debug_keys}
@@ -185,7 +187,7 @@ _smarty_console.document.write('        <tr class="drow{if $count is even}even{e
     {/if}
   {sectionelse}
 _smarty_console.document.write('\t    <tr>\n'
-+'            <td class="dnone" colspan="2">No template variables assigned.</td>\n'
++'            <td class="dnone" colspan="2">Нет назначенных переменных шаблона.</td>\n'
 +'        </tr>\n');
   {/section}
 _smarty_console.document.write('</table>');

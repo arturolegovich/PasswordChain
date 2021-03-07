@@ -85,7 +85,7 @@ class SB_HTTPStream
     // Port
     var $port;
 
-    function SB_HTTPStream($timeout=5)
+    function __construct($timeout=5)
     {
         $this->timeout = $timeout;
     }
@@ -175,7 +175,7 @@ class SB_HTTPStream
  */
 class SB_HTTPStream430 extends SB_HTTPStream
 {
-    function SB_HTTPStream430($timeout=5)
+    function __construct($timeout=5)
     {
         $this->SB_HTTPStream($timeout);
     }
@@ -233,7 +233,7 @@ class SB_PageParser
 
     var $debugInfo = '';
 
-    function SB_PageParser($url)
+    function __construct($url)
     {
         $this->maxBytes = 20000;
         $this->timeout = 2;
@@ -241,7 +241,7 @@ class SB_PageParser
         /* This is the timeout while reading or writing data
          * The function name changed in PHP 4.3
          */
-        if (version_compare(phpversion(), '4.3.0', '>='))
+        if (version_compare(phpversion(), '4', '='))
         {
             $this->http = new SB_HTTPStream430($this->timeout);
         }
