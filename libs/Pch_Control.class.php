@@ -164,6 +164,15 @@ function __destruct()
     $this->_db->__destruct();
 }
 
+// Клонирование объекта
+public function __clone()
+{
+  // отключение отладку
+  $this->debug($this->debug(null));
+  // очиста объекта
+  $this->clearAccessors();
+}
+
 // -----------------------------------------------------------------------------
 //                                Properties.
 // -----------------------------------------------------------------------------
@@ -1274,8 +1283,6 @@ function changePassword($newkey)
         return false;
     }
 	$tmpControl = clone $this;
-    $tmpControl->debug($this->debug(null));
-	$tmpControl->clearAccessors();
     $user    = $this->user();
     $tmpUser = $user . '__';
     if (!$tmpControl->addUser($tmpUser, $newkey, $this->getSettings())) {
