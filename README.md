@@ -6,7 +6,7 @@ support:
 
 - PHP 7.1.0 or higher
 - MySQL/MariaDB 5.5.58 or higher
-- OpenSSL 1.1.1i
+- OpenSSL 1.1.1i or higher
 - gost-engine 1.1.0.3
 
 It's STRONGLY recommended that you run this system on a web server with 
