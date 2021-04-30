@@ -1,5 +1,4 @@
-# PasswordChain 2.1.1 (OpenSSL)
--
+# PasswordChain 2.1.2 (OpenSSL)
 Requirements
 
 The system requires PHP 7.1.0 with MySQL support, and php_openssl.so/php_openssl.dll 
