@@ -16,27 +16,18 @@
         polices (MySQL: http://www.mysql.com/company/legal/trademark.html)
     *}
     {if ! $auth}
-    <!--<a href="https://money.yandex.ru/to/410015769312157" title="Помощь проекту">
-        <img src="{$urlImages}logos/project-support.jpg" alt="Поддержка проекта" width="88" height="32" />
-    </a>-->
     <a href="https://www.smarty.net/" target="_blank">
-        <img src="{$urlImages}logos/smarty_icon.gif" alt="Движок шаблона Smarty" width="88" height="31" />
+        <img src="{$urlImages}logos/smarty_icon.gif" alt="Движок шаблона Smarty" width="88" height="32" />
     </a>
     <a href="http://www.php.net/" target="_blank">
-        <img src="{$urlImages}logos/powered_php_03.gif" alt="Работает на PHP" width="77" height="33" />
+        <img src="{$urlImages}logos/powered_php_03.gif" alt="Работает на PHP" width="77" height="32" />
     </a>
     <a href="https://mariadb.com/" target="_blank">
         <img src="{$urlImages}logos/powered-by-mariadb-126x32.png" alt="Работает на MariaDB" width="126" height="32" />
     </a>
-    <a href="http://sourceforge.net/">
-        <img src="{$urlImages}logos/sflogo.png" alt="Логотип SourceForge.net" width="88" height="31" />
+    <a href="https://github.com/">
+        <img src="{$urlImages}logos/github.png" alt="Логотип GitHub.com" width="88" height="32" />
     </a>
-    <!--<a href="http://www.pspad.com/" title="editor PSPad - беспалтный редактор">
-        <img src="{$urlImages}logos/pspad_6.gif" alt="редактор PSPad" width="88" height="31" />
-    </a>-->
-    <!--<a href="http://gogogadgetscott.info/computers/scripts/phpob">
-        <img src="{$urlImages}logos/phpOBrowser.gif" alt="Логотип SourceForge.net" width="89" height="43" />
-    </a>-->
     {/if}
 </div>
 
